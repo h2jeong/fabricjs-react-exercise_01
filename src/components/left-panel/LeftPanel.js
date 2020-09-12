@@ -1,13 +1,19 @@
 import React from "react";
 import Preview from "./Preview";
-import BackgroundImageSelector from "./BackgroundImageSelector";
+import { Grid } from "@material-ui/core";
 
 function LeftPanel() {
   return (
-    <div>
+    <Grid
+      container
+      item
+      xs={9}
+      direction="column"
+      alignItems="stretch"
+      spacing={3}
+    >
       <Preview />
-      <BackgroundImageSelector />
-    </div>
+    </Grid>
   );
 }
 
