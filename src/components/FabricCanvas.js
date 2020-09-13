@@ -31,7 +31,7 @@ function FabricCanvas({ height, width, zoomRatio }, ref) {
     });
     fabricCanvasRef.current = { canvas };
 
-    return () => canvas.dispose();
+    return () => canvas.dispose(); // cleanup
   }, []);
 
   useEffect(() => {
@@ -43,11 +43,11 @@ function FabricCanvas({ height, width, zoomRatio }, ref) {
       .setZoom(zoomRatio);
   }, [height, width, zoomRatio]);
 
-  // useImperativeHandle(ref, () => ({
-  //   get canvas() {
-  //     return fabricCanvasRef.current.canvas;
-  //   }
-  // }));
+  useImperativeHandle(ref, () => ({
+    get canvas() {
+      return fabricCanvasRef.current.canvas;
+    }
+  }));
 
   return <canvas ref={canvasRef} />;
 }

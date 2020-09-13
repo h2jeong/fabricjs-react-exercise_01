@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { CanvasContext } from "../CanvasContextProvider";
-import { Grid } from "@material-ui/core";
+import { Grid, debounce } from "@material-ui/core";
 import FabricCanvas from "../FabricCanvas";
 
 function Preview() {
@@ -24,6 +24,11 @@ function Preview() {
       });
     };
     canvasContext.current = ref.current;
+
+    window.addEventListener("resize", debounce(onWindowSizeChange, 150));
+    return () => {
+      window.removeEventListener("resize", onWindowSizeChange);
+    };
   }, [canvasContext]);
 
   return (
@@ -31,6 +36,7 @@ function Preview() {
       <FabricCanvas
         height={size.height}
         ref={ref}
+        s
         width={size.width}
         zoomRatio={size.zoomRatio}
       />
